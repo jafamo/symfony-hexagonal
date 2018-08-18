@@ -1,0 +1,38 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+    # Symfony Http Autowiring
+    App\Infrastructure\Http\Symfony\:
+        resource: '../src/Infrastructure/Http/Symfony/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # Symfony Controller Autowiring
+    App\Infrastructure\Http\Symfony\Controller\:
+        resource: '../src/Infrastructure/Http/Symfony/Controller/*'
+        tags: ['controller.service_arguments']
+
+    # Symfony Console Commands Autowiring
+    App\Infrastructure\Cli\Symfony\Command\:
+        resource: '../src/Infrastructure/Cli/Symfony/Command/*'
+        tags: ['console.command']
+
+    # Symfony Messenger Autowiring
+    App\Infrastructure\Messaging\Symfony\:
+        resource: '../src/Infrastructure/Messaging/Symfony/*'
+
+    # Doctrine Autowiring (Repositories, Listeners, Fixtures)
+    App\Infrastructure\Persistence\Doctrine\ORM\:
+        resource: '../src/Infrastructure/Persistence/Doctrine/ORM/*'
+        exclude: '../src/Infrastructure/Persistence/Doctrine/ORM/{Migrations,Types,Mappings}'
+
+    # Application Handlers
+    App\Application\Handler\:
+        resource: '../src/Application/Handler/*'
+        tags: ['messenger.message_handler']
