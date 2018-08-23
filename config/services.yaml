@@ -11,7 +11,7 @@ services:
     # Symfony Http Autowiring
     App\Infrastructure\Http\Symfony\:
         resource: '../src/Infrastructure/Http/Symfony/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        exclude: '../src/Infrastructure/Http/Symfony/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
     # Symfony Controller Autowiring
     App\Infrastructure\Http\Symfony\Controller\:
