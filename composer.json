@@ -58,8 +58,8 @@
     },
     "scripts": {
         "auto-scripts": [
-            "@php bin/console cache:clear",
-            "@php bin/console assets:install %PUBLIC_DIR%"
+            "php bin/console cache:clear",
+            "php bin/console assets:install public --symlink"
         ],
         "post-install-cmd": [
             "@auto-scripts"
